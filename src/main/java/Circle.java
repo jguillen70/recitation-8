@@ -12,15 +12,6 @@ public class Circle
     private double radius;
 
     /**
-     * Default constructor that initializes an instance of Circle
-     * to (0,0) with a radius of 1.0.
-     */
-    public Circle()
-    {
-        //TODO: replace this line with your code
-    }
-
-    /**
      * Constructor that initializes an instance of Circle to (0,0)
      * with a radius given by the parameter radius.
      *
@@ -28,7 +19,8 @@ public class Circle
      */
     public Circle(double radius)
     {
-        //TODO: replace this line with your code
+        this.radius = radius;
+        location = new Point();
     }
 
     /**
@@ -40,7 +32,8 @@ public class Circle
      */
     public Circle(Point location, double radius)
     {
-        //TODO: replace this line with your code
+        this.radius = radius;
+        this.location = new Point(location);
     }
 
     //accessors
@@ -51,8 +44,7 @@ public class Circle
      */
     public double getRadius()
     {
-        //TODO: replace this line and the line below with your code
-        return 0.0;
+        return radius;
     }
 
     /**
@@ -62,8 +54,7 @@ public class Circle
      */
     public Point getLocation()
     {
-        //TODO: replace this line and the line below with your code
-        return null;
+        return new Point(location);
     }
 
     // mutator methods
@@ -74,7 +65,7 @@ public class Circle
      */
     public void setRadius(double radius)
     {
-        //TODO: replace this line with your code
+        this.radius = radius;
     }
 
     /**
@@ -84,7 +75,7 @@ public class Circle
      */
     public void setLocation(Point location)
     {
-        //TODO: replace this line with your code
+        this.location = new Point (location);
     }
 
     // other methods
@@ -94,10 +85,12 @@ public class Circle
      *
      * @return true if the point is in the circle; otherwise false
      */
-    public boolean contains(Point p)
-    {
-        //TODO: replace this line and the line below with your code
-        return false;
+    public boolean contains(Point p) {
+        double dx = p.getX() - location.getX();
+        double dy = p.getY() - location.getY();
+        double dist = dx * dx + dy * dy;
+
+        return dist <= radius * radius;
     }
 
     /**
@@ -108,8 +101,13 @@ public class Circle
      */
     public boolean intersects(Circle aCircle)
     {
-        //TODO: replace this line and the line below with your code
-        return false;
+        double dx = aCircle.getLocation().getX() - location.getX();
+        double dy = aCircle.getLocation().getY() - location.getY();
+        double distanceSquared = dx * dx + dy * dy;
+
+        double radiusSum = radius + aCircle.getRadius();
+
+        return distanceSquared <= radiusSum * radiusSum;
     }
 
     /**
